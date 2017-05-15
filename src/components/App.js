@@ -1,9 +1,14 @@
 import React from 'react';
+import PageHeader from './PageHeader';
+import Board from './Board';
 
 class App extends React.Component {
   render() {
     return (
-      <h1>Hello World!</h1>
+      <div className='parent-container'>
+        <PageHeader />
+        <Board />
+      </div>
     )
   }
 }

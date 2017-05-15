@@ -1,5 +1,53 @@
-$background: green;
+$fccGreen: #006400;
 
-html {
-  background-color: $background;
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.header {
+  width: 100%;
+  background-color: $fccGreen;
+  padding: 0 20px;
+
+  .logo {
+    width: 25%;
+    height: auto;
+  }
+}
+
+.board {
+  margin: auto;
+  margin-top: 20px;
+  max-width: 80%;
+  border: 1px solid #333;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  text-align: left;
+
+  table {
+    width: 100%;
+  }
+
+  .title {
+    background-color: $fccGreen;
+    color: #fff;
+    text-align: center;
+    padding: 0;
+    margin: 0
+  }
+  ul {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  a {
+    text-decoration: none;
+  }
+  .profile-picture {
+    height: 50px;
+    width: 50px;
+  }
 }
