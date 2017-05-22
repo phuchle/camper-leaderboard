@@ -1,17 +1,27 @@
 import axios from 'axios';
 
-function sortData(response) {
-  return response.data.sort((a,b) => {
-    return b.recent - a.recent;
+// const sortData = (response, category) => {
+//   return response.data.sort((a,b) => {
+//     return b[category] - a[category];
+//   });
+// }
+
+const fetchTopRecent = () => {
+  return axios.get('https://fcctop100.herokuapp.com/api/fccusers/top/recent')
+  .then((response) => {
+    return response.data;
   });
 }
 
-module.exports = {
-  fetchTop30: () => {
-    return axios.get('https://fcctop100.herokuapp.com/api/fccusers/top/recent')
-      .then(sortData);
-  },
-  fetchTopAllTime: () => {
+const fetchTopAllTime = () => {
+  return axios.get('https://fcctop100.herokuapp.com/api/fccusers/top/alltime')
+    .then((response) => {
+      return response.data;
+    });
+}
 
+module.exports = {
+  fetchTopRecentlyAndAllTime: () => {
+    return axios.all([fetchTopRecent(), fetchTopAllTime()]);
   }
 }

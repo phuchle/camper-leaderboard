@@ -33,65 +33,75 @@ Row.propTypes = {
 }
 
 class BoardCategories extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.loadRecent = this.loadRecent.bind(this);
+    this.loadAllTime = this.loadAllTime.bind(this);
+  }
+  loadRecent() {
+    this.props.loadRows(this.props.recent);
+  }
+  loadAllTime() {
+    this.props.loadRows(this.props.allTime);
+  }
   render() {
     return (
       <thead className='headers'>
         <tr>
           <th>#</th>
           <th>Camper Name</th>
-          <th>Points in past 30 days
+          <th
+            id='recent-header'
+            onClick={this.loadRecent}
+            className='clickable'
+          >
+            Points in past 30 days
             <span>&#9660;</span>
           </th>
-          <th>All time points</th>
+          <th
+            id='all-time-header'
+            onClick={this.loadAllTime}
+            className='clickable'
+          >
+            All time points
+          </th>
         </tr>
       </thead>
     )
   }
 }
 
+BoardCategories.propTypes = {
+  loadRows: PropTypes.func.isRequired,
+  recent: PropTypes.array.isRequired,
+  allTime: PropTypes.array.isRequired
+}
 class Board extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       recent: null,
+      allTime: null,
       loading: true,
-      error: null
+      error: null,
+      rows: []
     }
+    this.makeRows = this.makeRows.bind(this);
+    this.setRows = this.setRows.bind(this);
   }
 
-  componentDidMount() {
-    api.fetchTop30()
-      .then((response) => {
-        if (response === null) {
-          return this.setState(() => {
-            return {
-              error: 'Check API is working correctly.',
-              loading: false
-            }
-          });
-        }
-        this.setState(() => {
-          return {
-            recent: response,
-            loading: false
-          }
-        });
-      });
-  }
+  setRows(userArr) {
+    let rows = this.makeRows(userArr);
 
-  render() {
-    let loading = this.state.loading;
-    let recent = this.state.recent;
-    let rows = [];
-    if (loading) {
+    this.setState({
+      rows: rows
+    });
+  }
+  makeRows(userArr) {
+    return userArr.map((obj, index) => {
       return (
-        <p>Loading</p>
-      )
-    }
-
-    recent.forEach((obj, index) => {
-      rows.push(
         <Row
           key={obj.username}
           rank={index + 1}
@@ -100,14 +110,45 @@ class Board extends React.Component {
           recent={obj.recent}
           allTime={obj.alltime}
         />
-        )
+      )
     });
+  }
+  componentDidMount() {
+    api.fetchTopRecentlyAndAllTime().then((results) => {
+      if (results === null) {
+        return this.setState({
+          error: 'Check API responses.',
+          loading: false
+        });
+      }
+      this.setState({
+        recent: results[0],
+        allTime: results[1],
+        rows: this.makeRows(results[0]),
+        loading: false,
+        error: null
+      });
+    });
+  }
+
+  render() {
+    let loading = this.state.loading;
+    if (loading) {
+      return (
+        <h1>Loading</h1>
+      )
+    }
+
     return (
       <div className='board'>
         <h1 className='title'>Leaderboard</h1>
         <table>
-          <BoardCategories />
-          <tbody>{rows}</tbody>
+          <BoardCategories
+            loadRows={this.setRows}
+            recent={this.state.recent}
+            allTime={this.state.allTime}
+          />
+          <tbody>{this.state.rows}</tbody>
         </table>
       </div>
     )
