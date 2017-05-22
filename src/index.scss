@@ -22,7 +22,7 @@ html, body {
 .board {
   margin: auto;
   margin-top: 20px;
-  max-width: 80%;
+  max-width: 50%;
   border: 1px solid #333;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
@@ -30,13 +30,21 @@ html, body {
 
   table {
     width: 100%;
+    background-color: #b9b9b9;
+    th {
+      background-color: #ffffff;
+    }
+    tr, th, td {
+      height: 50px;
+      padding: 10px;
+    }
   }
 
   .title {
     background-color: $fccGreen;
     color: #fff;
     text-align: center;
-    padding: 0;
+    padding: 10px;
     margin: 0
   }
   ul {
@@ -52,5 +60,8 @@ html, body {
   }
   .clickable {
     cursor: pointer;
+  }
+  .rank {
+    text-align: center;
   }
 }

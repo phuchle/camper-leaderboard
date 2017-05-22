@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 function Row(props) {
   return (
-    <tr>
-      <td>{props.rank}</td>
+    <tr style={props.backgroundStyle}>
+      <td className='rank'>{props.rank}</td>
       <td>
         <a
           href={'https://freecodecamp.com/' + props.username}
@@ -29,7 +29,14 @@ Row.propTypes = {
   img: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   recent: PropTypes.number.isRequired,
-  allTime: PropTypes.number.isRequired
+  allTime: PropTypes.number.isRequired,
+  backgroundStyle: PropTypes.object.isRequired
+}
+
+Row.defaultProps = {
+  backgroundStyle: {
+    backgroundColor: '#ccc'
+  }
 }
 
 class BoardCategories extends React.Component {
@@ -49,7 +56,7 @@ class BoardCategories extends React.Component {
     return (
       <thead className='headers'>
         <tr>
-          <th>#</th>
+          <th className='rank'>#</th>
           <th>Camper Name</th>
           <th
             id='recent-header'
@@ -101,14 +108,24 @@ class Board extends React.Component {
   }
   makeRows(userArr) {
     return userArr.map((obj, index) => {
+      let greyBackground;
+      let rank = index + 1
+
+      if (rank % 2 !== 0) {
+        greyBackground = {
+          backgroundColor: '#f2f2f2'
+        }
+      }
+
       return (
         <Row
           key={obj.username}
-          rank={index + 1}
+          rank={rank}
           img={obj.img}
           username={obj.username}
           recent={obj.recent}
           allTime={obj.alltime}
+          backgroundStyle={greyBackground}
         />
       )
     });
