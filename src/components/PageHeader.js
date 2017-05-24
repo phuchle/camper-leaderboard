@@ -6,7 +6,7 @@ function PageHeader(props) {
       <div className='logo'>
         <a href='https://www.freecodecamp.com/'>
         <img
-          src={'./src/images/freecodecamp_logo.svg'}
+          src={require('../images/freecodecamp_logo.svg')}
           alt='freecodecamp'
         />
       </a>
