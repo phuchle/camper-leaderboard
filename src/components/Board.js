@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 function Row(props) {
   return (
-    <tr style={props.backgroundStyle}>
+    <tr>
       <td className='rank'>{props.rank}</td>
       <td>
         <a
@@ -30,7 +30,6 @@ Row.propTypes = {
   username: PropTypes.string.isRequired,
   recent: PropTypes.number.isRequired,
   allTime: PropTypes.number.isRequired,
-  backgroundStyle: PropTypes.object.isRequired
 }
 
 Row.defaultProps = {
@@ -121,14 +120,7 @@ class Board extends React.Component {
   }
   makeRows(userArr) {
     return userArr.map((obj, index) => {
-      let greyBackground;
       let rank = index + 1
-
-      if (rank % 2 !== 0) {
-        greyBackground = {
-          backgroundColor: '#f2f2f2'
-        }
-      }
 
       return (
         <Row
@@ -138,7 +130,6 @@ class Board extends React.Component {
           username={obj.username}
           recent={obj.recent}
           allTime={obj.alltime}
-          backgroundStyle={greyBackground}
         />
       )
     });
