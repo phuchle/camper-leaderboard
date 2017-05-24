@@ -9,9 +9,8 @@ html, body {
 }
 
 .header {
-  width: 100%;
   background-color: $fccGreen;
-  padding: 0 20px;
+  padding-left: 20px;
 
   .logo {
     width: 25%;
@@ -27,6 +26,7 @@ html, body {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   text-align: left;
+  margin-bottom: 50px;
 
   table {
     width: 100%;
