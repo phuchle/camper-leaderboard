@@ -45,12 +45,25 @@ class BoardCategories extends React.Component {
 
     this.loadRecent = this.loadRecent.bind(this);
     this.loadAllTime = this.loadAllTime.bind(this);
+
+    this.state = {
+      recentHeaderActive: true,
+      allTimeHeaderActive: false
+    }
   }
   loadRecent() {
     this.props.loadRows(this.props.recent);
+    this.setState({
+      recentHeaderActive: true,
+      allTimeHeaderActive: false
+    });
   }
   loadAllTime() {
     this.props.loadRows(this.props.allTime);
+    this.setState({
+      recentHeaderActive: false,
+      allTimeHeaderActive: true
+    });
   }
   render() {
     return (
@@ -61,15 +74,14 @@ class BoardCategories extends React.Component {
           <th
             id='recent-header'
             onClick={this.loadRecent}
-            className='clickable'
+            className={this.state.recentHeaderActive ? 'arrow-down' : ''}
           >
             Points in past 30 days
-            <span>&#9660;</span>
           </th>
           <th
             id='all-time-header'
             onClick={this.loadAllTime}
-            className='clickable'
+            className={this.state.allTimeHeaderActive ? 'arrow-down' : ''}
           >
             All time points
           </th>
@@ -84,6 +96,7 @@ BoardCategories.propTypes = {
   recent: PropTypes.array.isRequired,
   allTime: PropTypes.array.isRequired
 }
+
 class Board extends React.Component {
   constructor(props) {
     super(props);
