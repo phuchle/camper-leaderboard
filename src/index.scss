@@ -1,4 +1,5 @@
 $fccGreen: #006400;
+$hoverBg: #cfcfcf;
 
 html, body {
   width: 100%;
@@ -17,16 +18,20 @@ html, body {
   .logo {
     width: 25%;
     height: auto;
+    img {
+      width: 80%;
+    }
   }
 }
 
 .board {
   margin: auto;
   margin-top: 20px;
-  min-width: 400px;
   max-width: 800px;
   text-align: left;
   margin-bottom: 50px;
+  border: 1px solid #333;
+  border-radius: 5px;
 
   table {
     width: 100%;
@@ -35,21 +40,20 @@ html, body {
       background-color: #ffffff;
     }
     tr, th, td {
-      height: 50px;
+      // height: 50px;
       padding: 10px;
     }
     tr:nth-of-type(odd) {
       background-color: #f2f2f2;
     }
     tr:hover {
-      background-color: #cfcfcf;
+      background-color: $hoverBg;
     }
   }
 
   .title {
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    color: $fccGreen;
+    background-color: $fccGreen;
+    color: #ffffff;
     text-align: center;
     padding: 10px;
     margin: 0;
@@ -69,6 +73,10 @@ html, body {
   #recent-header, #all-time-header {
     cursor: pointer;
   }
+  #recent-header:hover, #all-time-header:hover {
+    color: $fccGreen;
+  }
+
   .rank {
     text-align: center;
   }
@@ -84,5 +92,20 @@ html, body {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 5px solid #000000;
+  }
+}
+
+@media
+only screen and (max-width: 760px) {
+  .header {
+    height: 10vh;
+    .logo {
+      width: 100%;
+    }
+  }
+  .table {
+    table {
+      min-width: 100%;
+    }
   }
 }

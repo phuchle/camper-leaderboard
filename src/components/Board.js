@@ -68,7 +68,7 @@ class BoardCategories extends React.Component {
     return (
       <thead className='headers'>
         <tr>
-          <th className='rank'>#</th>
+          <th className='rank'>Rank</th>
           <th>Camper Name</th>
           <th
             id='recent-header'
