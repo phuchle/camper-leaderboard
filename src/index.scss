@@ -29,24 +29,34 @@ html, body {
   max-width: 800px;
   text-align: left;
   margin-bottom: 50px;
-  border: 1px solid #333;
   border-radius: 5px;
 
   table {
+    table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
+    tr, th, td {
+      text-align: center;
+    }
     th {
       background-color: #ffffff;
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
-    tr, th, td {
-      // height: 50px;
-      padding: 10px;
+    tr {
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
+    /* Zebra striping */
     tr:nth-of-type(odd) {
-      background-color: #f2f2f2;
+      background: #f2f2f2;
     }
     tr:hover {
       background-color: $hoverBg;
+    }
+    td {
+      vertical-align: middle;
+      width: 25%;
     }
   }
 
@@ -64,6 +74,9 @@ html, body {
   }
   a {
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .profile-picture {
     height: 50px;
@@ -76,15 +89,37 @@ html, body {
     color: $fccGreen;
   }
 
-  .rank {
-    text-align: center;
-  }
   .arrow-down {
     position: relative;
   }
   .arrow-down:before {
     content: '';
     position: absolute;
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        position: relative;
+        padding-left: 50%;
+      }
+
+      td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+      }
+
+      /*
+      Label the data
+      */
+      td:nth-of-type(1):before { content: "First Name: "; }
+      td:nth-of-type(2):before { content: "Last Name: "; }
+      td:nth-of-type(3):before { content: "Job Title: "; }
+      td:nth-of-type(4):before { content: "Favorite Color: "; }
     right: 10%;
     width: 0;
     height: 0;
@@ -102,9 +137,55 @@ only screen and (max-width: 760px) {
       height: 80%;
     }
   }
-  .table {
+  .board {
     table {
       min-width: 100%;
+      tr {
+        border: 1px solid #ccc;
+      }
+      td {
+        /* Behave  like a "row" */
+        text-align: left;
+        border: none;
+        position: relative;
+        padding-left: 50%;
+      }
+
+      td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+      }
+
+      /*
+      Label the data
+      */
+      td:nth-of-type(1):before { content: "First Name: "; }
+      td:nth-of-type(2):before { content: "Last Name: "; }
+      td:nth-of-type(3):before { content: "Job Title: "; }
+      td:nth-of-type(4):before { content: "Favorite Color: "; }
+
+      a {
+        display: block;
+      }
     }
   }
+  /* Force table to not be like tables anymore */
+table, thead, tbody, th, td, tr {
+  display: block;
+}
+
+/* Hide table headers (but not display: none;, for accessibility) */
+thead tr {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+
 }

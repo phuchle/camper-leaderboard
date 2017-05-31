@@ -10,12 +10,13 @@ function Row(props) {
         <a
           href={'https://freecodecamp.com/' + props.username}
         >
+         {props.username}
+         
          <img
            className='profile-picture'
            src={props.img}
            alt={props.username}
          />
-         {' ' + props.username}
         </a>
       </td>
       <td>{props.recent}</td>
@@ -75,14 +76,14 @@ class BoardCategories extends React.Component {
             onClick={this.loadRecent}
             className={this.state.recentHeaderActive ? 'arrow-down' : ''}
           >
-            Points in past 30 days
+            Recent Pts
           </th>
           <th
             id='all-time-header'
             onClick={this.loadAllTime}
             className={this.state.allTimeHeaderActive ? 'arrow-down' : ''}
           >
-            All time points
+            All time Pts
           </th>
         </tr>
       </thead>
