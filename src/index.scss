@@ -13,13 +13,12 @@ html, body {
   background-color: $fccGreen;
   padding-left: 20px;
   min-height: 10%;
-  max-height: 50px;
 
   .logo {
-    width: 25%;
+    width: 25vw;
     height: auto;
     img {
-      width: 80%;
+      height: 100%;
     }
   }
 }
@@ -100,7 +99,7 @@ only screen and (max-width: 760px) {
   .header {
     height: 10vh;
     .logo {
-      width: 100%;
+      height: 80%;
     }
   }
   .table {
